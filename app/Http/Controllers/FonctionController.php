@@ -12,7 +12,33 @@ class FonctionController extends Controller
      */
     public function index()
     {
+        $functions = Fonction::all();
+
+        return view("functions.index",compact("functions"));
+    }
+
+    public function saveFunction(Request $request)
+    {
+        // get the form data
+        $id = $request->input('id');
+        $name = $request->input('name');
         
+        // determine whether to create or update the record
+        if ($id) {
+            // update the existing record
+            $function = Fonction::find($id);
+            $function->name = $name;
+            $function->save();
+
+            return response()->json(['success' => true, 'message' => 'Function updated successfully']);
+        } else {
+            // create a new record
+            $function = new Fonction();
+            $function->name = $name;
+            $function->save();
+
+            return response()->json(['success' => true, 'message' => 'Function created successfully']);
+        }
     }
 
     /**
@@ -58,8 +84,10 @@ class FonctionController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Fonction $fonction)
+    public function destroy($id)
     {
-        //
+        $fonction = Fonction::find($id);
+        $fonction->delete();
+        return  response()->json(['success' => true, 'message' => 'Function deleted successfully'], 200);
     }
 }

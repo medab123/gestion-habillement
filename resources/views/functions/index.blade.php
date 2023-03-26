@@ -3,38 +3,22 @@
     <!-- Button trigger modal -->
 
     <!-- Modal -->
-    <div class="modal fade" id="clientModal" tabindex="-1" aria-labelledby="clientModalLabel" aria-hidden="true">
+    <div class="modal fade" id="functionModal" tabindex="-1" aria-labelledby="functionModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <form id="clientForm" method="POST">
+                <form id="functionForm" method="POST">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="clientModalLabel">Create New Client</h5>
+                        <h5 class="modal-title" id="functionModalLabel">Create New Client</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <!-- Input fields for creating or updating a client -->
+                        <!-- Input fields for creating or updating a function -->
                         @csrf
                         <div class="mb-3">
                             <label for="name" class="form-label">Name</label>
-                            <input type="text" class="form-control" id="name" name="name" required>
+                            <input type="text" class="form-control" id="nameInput" name="name" required>
                         </div>
-                        <div class="mb-3">
-                            <label for="lname" class="form-label">Last Name</label>
-                            <input type="text" class="form-control" id="lname" name="lname" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="function_id" class="form-label">Function</label>
-                            <select class="form-control" id="function_id" name="function_id" required>
-                                <!-- Options for selecting a function -->
-                                @foreach ($functions as $function)
-                                    <option value="{{ $function->id }}">{{ $function->name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label for="adresse" class="form-label">Address</label>
-                            <input type="text" class="form-control" id="adresse" name="adresse" required>
-                        </div>
+
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -48,7 +32,7 @@
         <div class="card-header">
             Clients
             <button class="btn btn-sm btn-success float-end text-white" data-bs-toggle="modal"
-                data-bs-target="#clientModal">Ajouter un client </button>
+                data-bs-target="#functionModal">Ajouter un function </button>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -56,34 +40,51 @@
                 <table class="table">
                     <thead class="table-dark">
                         <tr>
+                            <th>#</th>
                             <th>Nom</th>
-                            <th>Prenom</th>
-                            <th>Tel</th>
-                            <th>Fonction</th>
-                            <th>Tail</th>
-                            <th>Adresse</th>
+                            <th style="width: 100px">Action</th>
                         </tr>
 
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Mohammed</td>
-                            <td>Elabidi</td>
-                            <td>0xxxxxxxxxxx</td>
-                            <td>Developpeur </td>
-                            <td>Xl </td>
-                            <td>Rabat</td>
-
-                        </tr>
-
+                        @foreach ($functions as $function)
+                            <tr>
+                                <td>{{ $function->id }}</td>
+                                <td class="name">{{ $function->name }}</td>
+                                <td>
+                                    <button class="btn btn-sm text-success" onclick="edit({{ $function->id }},this)"><i
+                                            class="fas fa-edit"></i>
+                                        <button class="btn btn-sm text-danger" onclick="deleteFunction({{ $function->id }},this)"><i class="fa-solid fa-trash"></i>
+                                </td>
+                            </tr>
+                        @endforeach
                     </tbody>
-
                 </table>
             </div>
         </div>
     </div>
     <script>
-        $('#clientForm').submit(function(e) {
+        const edit = (id, btn) => {
+            var name = $(btn).parent().parent().children(".name").html()
+            $("#nameInput").val(name);
+            $("#functionModal").modal("show");
+            $("#functionForm").append("<input type='hidden' name='id' value='" + id + "'>")
+            console.log(id, name);
+        }
+        const deleteFunction = (id,btn) => {
+            $(btn).html(
+                '<span class="spinner-border spinner-border-sm " role="status" aria-hidden="true"></span>'
+            ).attr('disabled', true);
+            
+            $.get("{{ url('functions/delete') }}"+"/"+id).then(()=>{
+                $(btn).parent().parent().remove()
+            }).always(function(data) {
+                alert(data.message);
+            });
+            
+
+        }
+        $('#functionForm').submit(function(e) {
             e.preventDefault(); // prevent the form from submitting normally
 
             // get the form data
@@ -92,20 +93,20 @@
             // display a loading indicator
             $('.modal-footer button[type="submit"]').html(
                 '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>Loading...'
-                ).attr('disabled', true);
+            ).attr('disabled', true);
 
             // send the AJAX request
             $.ajax({
                 type: 'POST',
-                url: '{{ route('clients.save') }}',
+                url: '{{ route('functions.save') }}',
                 data: formData,
                 success: function(response) {
                     // display a success message and close the modal
-                    alert(response.message);
-                    $('#clientModal').modal('hide');
+                    //alert(response.message);
+                    $('#functionModal').modal('hide');
 
                     // reset the form fields
-                    $('#clientForm input, #clientForm select').val('');
+                    $('#functionForm input, #functionForm select').val('');
 
                     // reload the page to show the updated data
                     location.reload();
