@@ -19,7 +19,6 @@ return new class extends Migration
             $table->string("adresse");
             $table->foreign('function_id')->references('id')->on('fonctions')->onDelete('cascade');
 
-            
 
             $table->timestamps();
         });
