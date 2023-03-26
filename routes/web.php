@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FonctionController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ClientController;
 
@@ -15,7 +16,7 @@ use App\Http\Controllers\ClientController;
 */
 
 Route::get('/', function () {
-    return view('clients.index');
+    return view('Auth.login');
 });
 
 Auth::routes();
@@ -25,6 +26,8 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::middleware('auth')->group(function () {
     Route::view('about', 'about')->name('about');
     Route::resource('clients', ClientController::class);
+    Route::resource('functions', FonctionController::class);
+
     Route::get('users', [\App\Http\Controllers\UserController::class, 'index'])->name('users.index');
 
     Route::get('profile', [\App\Http\Controllers\ProfileController::class, 'show'])->name('profile.show');

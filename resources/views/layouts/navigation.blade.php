@@ -21,10 +21,29 @@
             <svg class="nav-icon">
                 <use xlink:href="{{ asset('icons/coreui.svg#cil-user') }}"></use>
             </svg>
-            {{ __('Users') }}
+            {{ __('Clients') }}
         </a>
     </li>
 
+    
+    <li class="nav-group" aria-expanded="false">
+        <a class="nav-link nav-group-toggle" href="#">
+            <svg class="nav-icon">
+                <use xlink:href="{{ asset('icons/coreui.svg#cil-star') }}"></use>
+            </svg>
+            Resource
+        </a>
+        <ul class="nav-group-items" style="height: 0px;">
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route("functions.index") }}" target="_top">
+                    <svg class="nav-icon">
+                        <use xlink:href="{{ asset('icons/coreui.svg#cil-bug') }}"></use>
+                    </svg>
+                    Fonctions
+                </a>
+            </li>
+        </ul>
+    </li>
     <li class="nav-item">
         <a class="nav-link" href="{{ route('about') }}">
             <svg class="nav-icon">
@@ -33,8 +52,7 @@
             {{ __('About us') }}
         </a>
     </li>
-
-    <li class="nav-group" aria-expanded="false">
+    <!--<li class="nav-group" aria-expanded="false">
         <a class="nav-link nav-group-toggle" href="#">
             <svg class="nav-icon">
                 <use xlink:href="{{ asset('icons/coreui.svg#cil-star') }}"></use>
@@ -51,5 +69,5 @@
                 </a>
             </li>
         </ul>
-    </li>
+    </li>-->
 </ul>
