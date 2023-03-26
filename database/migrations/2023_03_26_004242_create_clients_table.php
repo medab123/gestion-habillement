@@ -17,9 +17,9 @@ return new class extends Migration
             $table->string("lname");
             $table->unsignedBigInteger("function_id");
             $table->string("adresse");
-            $table->foreign('function_id')->references('id')->on('functions')->onDelete('cascade');
+            $table->foreign('function_id')->references('id')->on('fonctions')->onDelete('cascade');
 
-            
+
 
             $table->timestamps();
         });

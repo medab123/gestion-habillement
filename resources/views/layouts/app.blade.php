@@ -76,11 +76,9 @@
         </div>
     </div>
     <footer class="footer">
-        <div><a href="https://coreui.io">CoreUI </a><a href="https://coreui.io">Bootstrap Admin Template</a> &copy; 2021
-            creativeLabs.
+        <div><a href="https://itdevspot.com">ItDevSpot.com</a> &copy; 2021
         </div>
-        <div class="ms-auto">Powered by&nbsp;<a href="https://coreui.io/bootstrap/ui-components/">CoreUI UI
-                Components</a></div>
+        <div class="ms-auto">Powered by&nbsp;<a href="https://itdevspot.com">ItDevSpot.com</a></div>
     </footer>
 </div>
 <script src="{{ asset('js/coreui.bundle.min.js') }}"></script>
