@@ -3,12 +3,12 @@
     <!-- Button trigger modal -->
 
     <!-- Modal -->
-    <div class="modal fade" id="functionModal" tabindex="-1" aria-labelledby="functionModalLabel" aria-hidden="true">
+    <div class="modal fade" id="userModal" tabindex="-1" aria-labelledby="functionModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <form id="functionForm" method="POST">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="functionModalLabel">Create New Client</h5>
+                        <h5 class="modal-title" id="functionModalLabel">Create New Fournisseur</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
@@ -30,9 +30,9 @@
     </div>
     <div class="card">
         <div class="card-header">
-            Clients
+            Fournisseurs
             <button class="btn btn-sm btn-success float-end text-white" data-bs-toggle="modal"
-                data-bs-target="#functionModal">Ajouter un function </button>
+                data-bs-target="#userModal">Ajouter un function </button>
         </div>
         <div class="card-body">
             <div class="table-responsive">

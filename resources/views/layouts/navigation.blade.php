@@ -7,15 +7,6 @@
             {{ __('Dashboard') }}
         </a>
     </li>
-
-    <li class="nav-item">
-        <a class="nav-link" href="{{ route('users.index') }}">
-            <svg class="nav-icon">
-                <use xlink:href="{{ asset('icons/coreui.svg#cil-user') }}"></use>
-            </svg>
-            {{ __('Users') }}
-        </a>
-    </li>
     <li class="nav-item">
         <a class="nav-link" href="{{ route('clients.index') }}">
             <svg class="nav-icon">
@@ -24,6 +15,8 @@
             {{ __('Clients') }}
         </a>
     </li>
+
+
 
 
     <li class="nav-group" aria-expanded="false">
@@ -52,6 +45,27 @@
         </ul>
 
     </li>
+    <li class="nav-group" aria-expanded="false">
+        <a class="nav-link nav-group-toggle" href="#">
+
+            <i class="nav-icon cil-settings"></i>
+
+            Administration
+        </a>
+
+        <ul class="nav-group-items" style="height: 0px;">
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('users.index') }}">
+                    <svg class="nav-icon">
+                        <use xlink:href="{{ asset('icons/coreui.svg#cil-user') }}"></use>
+                    </svg>
+                    {{ __('Users') }}
+                </a>
+            </li>
+        </ul>
+
+    </li>
+
     <li class="nav-item">
         <a class="nav-link" href="{{ route('about') }}">
             <svg class="nav-icon">
