@@ -11,7 +11,8 @@ class ClientController extends Controller
     public function index()
     {
         $functions = Fonction::all();
-        $clients = Client::all(); // retrieve all clients from the database
+        $clients = Client::with("function")->get(); // retrieve all clients from the database
+        //dd($clients);
         return view('clients.index', compact('clients', 'functions')); // return the view with the clients data
     }
 
@@ -25,6 +26,7 @@ class ClientController extends Controller
         $id = $request->input('id');
         $name = $request->input('name');
         $lname = $request->input('lname');
+        $tele = $request->input('tel');
         $function_id = $request->input('function_id');
         $adresse = $request->input('adresse');
 
@@ -33,6 +35,7 @@ class ClientController extends Controller
             // update the existing record
             $client = Client::find($id);
             $client->name = $name;
+            $client->tele = $tele;
             $client->lname = $lname;
             $client->function_id = $function_id;
             $client->adresse = $adresse;
@@ -43,6 +46,7 @@ class ClientController extends Controller
             // create a new record
             $client = new Client();
             $client->name = $name;
+            $client->tele = $tele;
             $client->lname = $lname;
             $client->function_id = $function_id;
             $client->adresse = $adresse;

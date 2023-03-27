@@ -37,7 +37,7 @@
         <div class="card-body">
             <div class="table-responsive">
 
-                <table class="table">
+                <table class="table table-sm">
                     <thead class="table-dark">
                         <tr>
                             <th>#</th>
@@ -76,13 +76,12 @@
                 '<span class="spinner-border spinner-border-sm " role="status" aria-hidden="true"></span>'
             ).attr('disabled', true);
             
-            $.get("{{ url('functions/delete') }}"+"/"+id).then(()=>{
-                $(btn).parent().parent().remove()
+            $.get("{{ url('functions/delete') }}"+"/"+id).then((data)=>{
+                $(btn).parent().parent().remove();
+                alert(data.message);
             }).always(function(data) {
                 alert(data.message);
             });
-            
-
         }
         $('#functionForm').submit(function(e) {
             e.preventDefault(); // prevent the form from submitting normally

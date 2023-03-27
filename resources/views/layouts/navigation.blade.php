@@ -25,7 +25,7 @@
         </a>
     </li>
 
-    
+
     <li class="nav-group" aria-expanded="false">
         <a class="nav-link nav-group-toggle" href="#">
             <svg class="nav-icon">
@@ -33,16 +33,24 @@
             </svg>
             Resource
         </a>
+
         <ul class="nav-group-items" style="height: 0px;">
             <li class="nav-item">
-                <a class="nav-link" href="{{ route("functions.index") }}" target="_top">
+                <a class="nav-link" href="{{ route('functions.index') }}" target="_top">
                     <svg class="nav-icon">
                         <use xlink:href="{{ asset('icons/coreui.svg#cil-bug') }}"></use>
                     </svg>
                     Fonctions
                 </a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('fournisseurs.index') }}" target="_top">
+                    <i class=" nav-icon cil-factory"></i>
+                    Fournisseurs
+                </a>
+            </li>
         </ul>
+
     </li>
     <li class="nav-item">
         <a class="nav-link" href="{{ route('about') }}">

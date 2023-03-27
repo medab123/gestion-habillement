@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\FonctionController;
+use App\Http\Controllers\FournisseurController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ClientController;
 
@@ -24,7 +25,11 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::middleware('auth')->group(function () {
-    Route::get('functions/delete/{id}', [FonctionController::class,"destroy"])->name("clients.destroy2");
+    Route::get('functions/delete/{id}', [FonctionController::class,"destroy"])->name("functions.destroy2");
+    Route::get('clients/delete/{id}', [ClientController::class,"destroy"])->name("clients.destroy2");
+    Route::get('fournisseurs/delete/{id}', [FournisseurController::class,"destroy"])->name("fournisseurs.destroy2");
+    Route::resource('fournisseurs', FournisseurController::class);
+    Route::post('fournisseurs', [FournisseurController::class,"saveFournisseur"])->name("fournisseurs.save");
     Route::view('about', 'about')->name('about');
     Route::resource('clients', ClientController::class);
     Route::post('clients', [ClientController::class,"saveClient"])->name("clients.save");
