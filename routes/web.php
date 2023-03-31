@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\FonctionController;
 use App\Http\Controllers\FournisseurController;
+use App\Http\Controllers\TypeProduitController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ClientController;
 
@@ -16,9 +17,7 @@ use App\Http\Controllers\ClientController;
 |
 */
 
-Route::get('/', function () {
-    return view('Auth.login');
-});
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index']);
 
 Auth::routes();
 
@@ -30,6 +29,12 @@ Route::middleware('auth')->group(function () {
     Route::get('fournisseurs/delete/{id}', [FournisseurController::class,"destroy"])->name("fournisseurs.destroy2");
     Route::resource('fournisseurs', FournisseurController::class);
     Route::post('fournisseurs', [FournisseurController::class,"saveFournisseur"])->name("fournisseurs.save");
+
+    Route::get('typeProduits/delete/{id}', [TypeProduitController::class,"destroy"])->name("typeProduits.destroy2");
+    Route::resource('typeProduits', TypeProduitController::class);
+    Route::post('typeProduits', [TypeProduitController::class,"saveTypeProduit"])->name("typeProduits.save");
+    
+
     Route::view('about', 'about')->name('about');
     Route::resource('clients', ClientController::class);
     Route::post('clients', [ClientController::class,"saveClient"])->name("clients.save");

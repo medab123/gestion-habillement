@@ -1,17 +1,14 @@
 <ul class="sidebar-nav" data-coreui="navigation" data-simplebar>
     <li class="nav-item">
         <a class="nav-link" href="{{ route('home') }}">
-            <svg class="nav-icon">
-                <use xlink:href="{{ asset('icons/coreui.svg#cil-speedometer') }}"></use>
-            </svg>
+            <i class="nav-icon cil-speedometer"></i>
+
             {{ __('Dashboard') }}
         </a>
     </li>
     <li class="nav-item">
         <a class="nav-link" href="{{ route('clients.index') }}">
-            <svg class="nav-icon">
-                <use xlink:href="{{ asset('icons/coreui.svg#cil-user') }}"></use>
-            </svg>
+            <i class="nav-icon cil-user"></i>
             {{ __('Clients') }}
         </a>
     </li>
@@ -42,6 +39,13 @@
                     Fournisseurs
                 </a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('typeProduits.index') }}" target="_top">
+                    <i class="nav-icon cil-page"></i>
+
+                    Type des vetements
+                </a>
+            </li>
         </ul>
 
     </li>
@@ -56,9 +60,8 @@
         <ul class="nav-group-items" style="height: 0px;">
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('users.index') }}">
-                    <svg class="nav-icon">
-                        <use xlink:href="{{ asset('icons/coreui.svg#cil-user') }}"></use>
-                    </svg>
+                    <i class="nav-icon cil-user"></i>
+
                     {{ __('Users') }}
                 </a>
             </li>
@@ -66,14 +69,14 @@
 
     </li>
 
-    <li class="nav-item">
+   <!-- <li class="nav-item">
         <a class="nav-link" href="{{ route('about') }}">
             <svg class="nav-icon">
                 <use xlink:href="{{ asset('icons/coreui.svg#cil-speedometer') }}"></use>
             </svg>
             {{ __('About us') }}
         </a>
-    </li>
+    </li>-->
     <!--<li class="nav-group" aria-expanded="false">
         <a class="nav-link nav-group-toggle" href="#">
             <svg class="nav-icon">
