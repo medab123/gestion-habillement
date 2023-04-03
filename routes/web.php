@@ -5,6 +5,7 @@ use App\Http\Controllers\FournisseurController;
 use App\Http\Controllers\TypeProduitController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\VetementController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,6 +39,10 @@ Route::middleware('auth')->group(function () {
     Route::view('about', 'about')->name('about');
     Route::resource('clients', ClientController::class);
     Route::post('clients', [ClientController::class,"saveClient"])->name("clients.save");
+
+    Route::get('vetements/delete/{id}', [VetementController::class,"destroy"])->name("vetements.destroy2");
+    Route::resource('vetements', VetementController::class);
+    Route::post('vetements', [VetementController::class,"saveVetement"])->name("vetements.save");
     
     Route::resource('functions', FonctionController::class,["names"=>"functions"]);
     Route::post('functions', [FonctionController::class,"saveFunction"])->name("functions.save");

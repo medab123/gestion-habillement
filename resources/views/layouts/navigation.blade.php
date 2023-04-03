@@ -12,6 +12,12 @@
             {{ __('Clients') }}
         </a>
     </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('typeProduits.index') }}">
+            <img class="" style="width: 30px !important;margin-right: 18px"  src="{{ asset("icons/la-chemise.png") }}">
+            {{ __('Vetements') }}
+        </a>
+    </li>
 
 
 

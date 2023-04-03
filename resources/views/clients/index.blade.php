@@ -8,7 +8,8 @@
             <div class="modal-content">
                 <form id="clientForm" method="POST">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="clientModalLabel">Create New Client</h5>
+                        <h5 class="modal-title" id="clientModalLabel">Créer un nouveau
+ Client</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
@@ -102,6 +103,11 @@
         </div>
     </div>
     <script>
+        var myModalEl = document.getElementById('clientModal')
+        myModalEl.addEventListener('hide.bs.modal', function(event) {
+            $("#hiddenId").remove();
+            $('#clientForm').trigger("reset");
+        })
         const edit = (id, btn) => {
             var name = $(btn).parent().parent().children(".name").html()
             var lname = $(btn).parent().parent().children(".lname").html()
@@ -115,7 +121,7 @@
             $("#function_idInput").find("option:contains('" + functionName + "')").prop("selected", true);
             $("#adresseInput").val(adresse);
             $("#clientModal").modal("show");
-            $("#clientForm").append("<input type='hidden' name='id' value='" + id + "'>")
+            $("#clientForm").append("<input id='hiddenId' type='hidden' name='id' value='" + id + "'>")
             console.log(id, name);
         }
         const deleteClient = (id, btn) => {

@@ -3,22 +3,32 @@
     <!-- Button trigger modal -->
 
     <!-- Modal -->
-    <div class="modal fade" id="userModal" tabindex="-1" aria-labelledby="functionModalLabel" aria-hidden="true">
+    <div class="modal fade" id="vetementModal" tabindex="-1" aria-labelledby="vetementModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <form id="functionForm" method="POST">
+                <form id="vetementForm" method="POST">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="functionModalLabel">Créer un nouveau
- Fournisseur</h5>
+                        <h5 class="modal-title" id="vetementModalLabel">Créer un nouveau
+                            Vetement</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <!-- Input fields for creating or updating a function -->
+                        <!-- Input fields for creating or updating a vetement -->
                         @csrf
                         <div class="mb-3">
-                            <label for="name" class="form-label">Name</label>
-                            <input type="text" class="form-control" id="nameInput" name="name" required>
+                            <label for="name" class="form-label ">Name</label>
+                            <input type="text" class="form-control form-control-sm" id="nameInput" name="name" required>
                         </div>
+                        <div class="mb-3">
+                            <label for="name" class="form-label ">Type</label>
+                            <select class="form-control form-control-sm" name="type_id" id="typeInput">
+                                <option value="">choisir un type ..</option>
+                                @foreach($types as $type)
+                                    <option value="{{$type->id}}">{{$type->name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        
 
                     </div>
                     <div class="modal-footer">
@@ -31,9 +41,9 @@
     </div>
     <div class="card">
         <div class="card-header">
-            Fournisseurs
+            Type de vetement 
             <button class="btn btn-sm btn-success float-end text-white" data-bs-toggle="modal"
-                data-bs-target="#userModal">Ajouter un function </button>
+                data-bs-target="#vetementModal">Ajouter un type de vetement </button>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -43,19 +53,21 @@
                         <tr>
                             <th>#</th>
                             <th>Nom</th>
+                            <th>Type</th>
                             <th style="width: 100px">Action</th>
                         </tr>
 
                     </thead>
                     <tbody>
-                        @foreach ($functions as $function)
+                        @foreach ($vetements as $vetement)
                             <tr>
-                                <td>{{ $function->id }}</td>
-                                <td class="name">{{ $function->name }}</td>
+                                <td>{{ $vetement->id }}</td>
+                                <td class="name">{{ $vetement->name }}</td>
+                                <td class="type">{{ $vetement->type?->name }}</td>
                                 <td>
-                                    <button class="btn btn-sm text-success" onclick="edit({{ $function->id }},this)"><i
+                                    <button class="btn btn-sm text-success" onclick="edit({{ $vetement->id }},this)"><i
                                             class="fas fa-edit"></i>
-                                        <button class="btn btn-sm text-danger" onclick="deleteFunction({{ $function->id }},this)"><i class="fa-solid fa-trash"></i>
+                                        <button class="btn btn-sm text-danger" onclick="deleteVetement({{ $vetement->id }},this)"><i class="fa-solid fa-trash"></i>
                                 </td>
                             </tr>
                         @endforeach
@@ -65,26 +77,34 @@
         </div>
     </div>
     <script>
+        var myModalEl = document.getElementById('vetementModal')
+        myModalEl.addEventListener('hide.bs.modal', function(event) {
+            $("#hiddenId").remove();
+            $('#vetementForm').trigger("reset");
+        })
         const edit = (id, btn) => {
             var name = $(btn).parent().parent().children(".name").html()
+            var type = $(btn).parent().parent().children(".type").html()
+
             $("#nameInput").val(name);
-            $("#functionModal").modal("show");
-            $("#functionForm").append("<input type='hidden' name='id' value='" + id + "'>")
+            $("#typeInput").find("option:contains('" + type + "')").prop("selected", true);
+            $("#vetementModal").modal("show");
+            $("#vetementForm").append("<input id='hiddenId' type='hidden' name='id' value='" + id + "'>")
             console.log(id, name);
         }
-        const deleteFunction = (id,btn) => {
+        const deleteVetement = (id,btn) => {
             $(btn).html(
                 '<span class="spinner-border spinner-border-sm " role="status" aria-hidden="true"></span>'
             ).attr('disabled', true);
             
-            $.get("{{ url('functions/delete') }}"+"/"+id).then((data)=>{
+            $.get("{{ url('vetements/delete') }}"+"/"+id).then((data)=>{
                 $(btn).parent().parent().remove();
                 alert(data.message);
             }).always(function(data) {
                 alert(data.message);
             });
         }
-        $('#functionForm').submit(function(e) {
+        $('#vetementForm').submit(function(e) {
             e.preventDefault(); // prevent the form from submitting normally
 
             // get the form data
@@ -98,15 +118,15 @@
             // send the AJAX request
             $.ajax({
                 type: 'POST',
-                url: '{{ route('functions.save') }}',
+                url: '{{ route('vetements.save') }}',
                 data: formData,
                 success: function(response) {
                     // display a success message and close the modal
                     //alert(response.message);
-                    $('#functionModal').modal('hide');
+                    $('#vetementModal').modal('hide');
 
                     // reset the form fields
-                    $('#functionForm input, #functionForm select').val('');
+                    $('#vetementForm input, #vetementForm select').val('');
 
                     // reload the page to show the updated data
                     location.reload();

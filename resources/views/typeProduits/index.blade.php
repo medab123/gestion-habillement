@@ -3,21 +3,23 @@
     <!-- Button trigger modal -->
 
     <!-- Modal -->
-    <div class="modal fade" id="userModal" tabindex="-1" aria-labelledby="typeProduitModalLabel" aria-hidden="true">
+    <div class="modal fade" id="typeProduitModal" tabindex="-1" aria-labelledby="typeProduitModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <form id="typeProduitForm" method="POST">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="typeProduitModalLabel">Create New TypeProduit</h5>
+                        <h5 class="modal-title" id="typeProduitModalLabel">Créer un nouveau
+ TypeProduit</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <!-- Input fields for creating or updating a typeProduit -->
                         @csrf
                         <div class="mb-3">
-                            <label for="name" class="form-label">Name</label>
-                            <input type="text" class="form-control" id="nameInput" name="name" required>
+                            <label for="name" class="form-label ">Name</label>
+                            <input type="text" class="form-control form-control-sm" id="nameInput" name="name" required>
                         </div>
+                        
 
                     </div>
                     <div class="modal-footer">
@@ -32,7 +34,7 @@
         <div class="card-header">
             Type de vetement 
             <button class="btn btn-sm btn-success float-end text-white" data-bs-toggle="modal"
-                data-bs-target="#userModal">Ajouter un type de vetement </button>
+                data-bs-target="#typeProduitModal">Ajouter un type de vetement </button>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -64,11 +66,16 @@
         </div>
     </div>
     <script>
+        var myModalEl = document.getElementById('typeProduitModal')
+        myModalEl.addEventListener('hide.bs.modal', function(event) {
+            $("#hiddenId").remove();
+            $('#typeProduitForm').trigger("reset");
+        })
         const edit = (id, btn) => {
             var name = $(btn).parent().parent().children(".name").html()
             $("#nameInput").val(name);
             $("#typeProduitModal").modal("show");
-            $("#typeProduitForm").append("<input type='hidden' name='id' value='" + id + "'>")
+            $("#typeProduitForm").append("<input id='hiddenId' type='hidden' name='id' value='" + id + "'>")
             console.log(id, name);
         }
         const deleteTypeProduit = (id,btn) => {
