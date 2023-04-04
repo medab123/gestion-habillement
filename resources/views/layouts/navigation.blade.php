@@ -34,7 +34,14 @@
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('tailleurs.index') }}" target="_top">
                     <i class="cil-cut nav-icon"></i>
-                    Tailleur
+                    Tailleurs
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('couleurs.index') }}" target="_top">
+                    <i class="cil-color-fill nav-icon"></i>
+
+                    Couleurs
                 </a>
             </li>
             <li class="nav-item">
@@ -54,7 +61,8 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('typeProduits.index') }}" target="_top">
-                    <i class="nav-icon cil-page"></i>
+                    <i class="nav-icon cil-find-in-page"></i>
+
 
                     Type des vetements
                 </a>

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CouleurController;
 use App\Http\Controllers\FonctionController;
 use App\Http\Controllers\FournisseurController;
 use App\Http\Controllers\TailleurController;
@@ -48,6 +49,10 @@ Route::middleware('auth')->group(function () {
     Route::get('tailleurs/delete/{id}', [TailleurController::class,"destroy"])->name("tailleurs.destroy2");
     Route::resource('tailleurs', TailleurController::class);
     Route::post('tailleurs', [TailleurController::class,"saveTailleur"])->name("tailleurs.save");
+
+    Route::get('couleurs/delete/{id}', [CouleurController::class,"destroy"])->name("couleurs.destroy2");
+    Route::resource('couleurs', CouleurController::class);
+    Route::post('couleurs', [CouleurController::class,"saveCouleur"])->name("couleurs.save");
     
     Route::resource('functions', FonctionController::class,["names"=>"functions"]);
     Route::post('functions', [FonctionController::class,"saveFunction"])->name("functions.save");
