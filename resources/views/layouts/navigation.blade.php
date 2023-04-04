@@ -8,13 +8,15 @@
     </li>
     <li class="nav-item">
         <a class="nav-link" href="{{ route('clients.index') }}">
-            <i class="nav-icon cil-user"></i>
+            <i class="cil-people nav-icon"></i>
+
             {{ __('Clients') }}
         </a>
     </li>
     <li class="nav-item">
         <a class="nav-link" href="{{ route('vetements.index') }}">
-            <img class="" style="width: 30px !important;margin-right: 18px"  src="{{ asset("icons/la-chemise.png") }}">
+            <img class="" style="width: 30px !important;margin-right: 18px"
+                src="{{ asset('icons/la-chemise.png') }}">
             {{ __('Vetements') }}
         </a>
     </li>
@@ -24,9 +26,8 @@
 
     <li class="nav-group" aria-expanded="false">
         <a class="nav-link nav-group-toggle" href="#">
-            <svg class="nav-icon">
-                <use xlink:href="{{ asset('icons/coreui.svg#cil-star') }}"></use>
-            </svg>
+            <i class="cil-star nav-icon"></i>
+
             Resource
         </a>
 
@@ -46,13 +47,12 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('functions.index') }}" target="_top">
-                    <svg class="nav-icon">
-                        <use xlink:href="{{ asset('icons/coreui.svg#cil-bug') }}"></use>
-                    </svg>
+                    <i class="cil-bug nav-icon"></i>
+
                     Fonctions
                 </a>
             </li>
-            
+
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('fournisseurs.index') }}" target="_top">
                     <i class=" nav-icon cil-factory"></i>
@@ -90,7 +90,7 @@
 
     </li>
 
-   <!-- <li class="nav-item">
+    <!-- <li class="nav-item">
         <a class="nav-link" href="{{ route('about') }}">
             <svg class="nav-icon">
                 <use xlink:href="{{ asset('icons/coreui.svg#cil-speedometer') }}"></use>
