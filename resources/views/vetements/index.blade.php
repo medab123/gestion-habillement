@@ -41,9 +41,9 @@
     </div>
     <div class="card">
         <div class="card-header">
-            Type de vetement 
+            List des vetements 
             <button class="btn btn-sm btn-success float-end text-white" data-bs-toggle="modal"
-                data-bs-target="#vetementModal">Ajouter un type de vetement </button>
+                data-bs-target="#vetementModal">Ajouter un nouveau vetement </button>
         </div>
         <div class="card-body">
             <div class="table-responsive">

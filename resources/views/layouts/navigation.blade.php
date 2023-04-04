@@ -13,7 +13,7 @@
         </a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="{{ route('typeProduits.index') }}">
+        <a class="nav-link" href="{{ route('vetements.index') }}">
             <img class="" style="width: 30px !important;margin-right: 18px"  src="{{ asset("icons/la-chemise.png") }}">
             {{ __('Vetements') }}
         </a>
@@ -32,6 +32,12 @@
 
         <ul class="nav-group-items" style="height: 0px;">
             <li class="nav-item">
+                <a class="nav-link" href="{{ route('tailleurs.index') }}" target="_top">
+                    <i class="cil-cut nav-icon"></i>
+                    Tailleur
+                </a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" href="{{ route('functions.index') }}" target="_top">
                     <svg class="nav-icon">
                         <use xlink:href="{{ asset('icons/coreui.svg#cil-bug') }}"></use>
@@ -39,6 +45,7 @@
                     Fonctions
                 </a>
             </li>
+            
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('fournisseurs.index') }}" target="_top">
                     <i class=" nav-icon cil-factory"></i>

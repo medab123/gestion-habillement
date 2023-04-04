@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\FonctionController;
 use App\Http\Controllers\FournisseurController;
+use App\Http\Controllers\TailleurController;
 use App\Http\Controllers\TypeProduitController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ClientController;
@@ -43,6 +44,10 @@ Route::middleware('auth')->group(function () {
     Route::get('vetements/delete/{id}', [VetementController::class,"destroy"])->name("vetements.destroy2");
     Route::resource('vetements', VetementController::class);
     Route::post('vetements', [VetementController::class,"saveVetement"])->name("vetements.save");
+
+    Route::get('tailleurs/delete/{id}', [TailleurController::class,"destroy"])->name("tailleurs.destroy2");
+    Route::resource('tailleurs', TailleurController::class);
+    Route::post('tailleurs', [TailleurController::class,"saveTailleur"])->name("tailleurs.save");
     
     Route::resource('functions', FonctionController::class,["names"=>"functions"]);
     Route::post('functions', [FonctionController::class,"saveFunction"])->name("functions.save");
