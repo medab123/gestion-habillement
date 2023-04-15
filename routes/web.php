@@ -7,6 +7,7 @@ use App\Http\Controllers\TailleurController;
 use App\Http\Controllers\TypeProduitController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\CommandeController;
 use App\Http\Controllers\VetementController;
 
 /*
@@ -57,6 +58,10 @@ Route::middleware('auth')->group(function () {
     Route::resource('functions', FonctionController::class,["names"=>"functions"]);
     Route::post('functions', [FonctionController::class,"saveFunction"])->name("functions.save");
     Route::get('users', [\App\Http\Controllers\UserController::class, 'index'])->name('users.index');
+
+    Route::get("commandes",[CommandeController::class,"index"])->name("commandes.index");
+    Route::post('commandes', [CommandeController::class,"saveCommande"])->name("commandes.save");
+    Route::get('commandes/{id}', [CommandeController::class,"show"])->name("commandes.show");
 
     Route::get('profile', [\App\Http\Controllers\ProfileController::class, 'show'])->name('profile.show');
     Route::put('profile', [\App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update');

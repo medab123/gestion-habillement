@@ -47,7 +47,7 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('functions.index') }}" target="_top">
-                    <i class="cil-bug nav-icon"></i>
+                    <i class="cil-bug nav-iconh"></i>
 
                     Fonctions
                 </a>
@@ -99,7 +99,7 @@
         </a>
     </li>-->
     <!--<li class="nav-group" aria-expanded="false">
-        <a class="nav-link nav-group-toggle" href="#">
+        <a class="nav-link nav-group-toggle" href="#">h
             <svg class="nav-icon">
                 <use xlink:href="{{ asset('icons/coreui.svg#cil-star') }}"></use>
             </svg>
