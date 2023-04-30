@@ -7,6 +7,20 @@
         </a>
     </li>
     <li class="nav-item">
+        <a class="nav-link" href="{{ route('commandes.index') }}">
+            <i class="nav-icon cil-speedometer"></i>
+
+            {{ __('Commandes') }}
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('livrisions.index') }}">
+            <i class="nav-icon cil-speedometer"></i>
+
+            {{ __('Livrisions') }}
+        </a>
+    </li>
+    <li class="nav-item">
         <a class="nav-link" href="{{ route('clients.index') }}">
             <i class="cil-people nav-icon"></i>
 

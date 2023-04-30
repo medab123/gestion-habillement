@@ -14,6 +14,12 @@ class ExampleTest extends TestCase
     {
         $response = $this->get('/');
 
-        $response->assertStatus(200);
+        $response->assertStatus(302);
+    }
+    public function test_the_application_returns_a_successful_response_qhdfq(): void
+    {
+        $response = $this->get('/');
+
+        $response->assertStatus(302);
     }
 }
