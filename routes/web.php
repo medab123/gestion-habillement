@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CommandeArticleController;
 use App\Http\Controllers\CouleurController;
 use App\Http\Controllers\FonctionController;
 use App\Http\Controllers\FournisseurController;
@@ -63,6 +64,11 @@ Route::middleware('auth')->group(function () {
     Route::get("commandes",[CommandeController::class,"index"])->name("commandes.index");
     Route::post('commandes', [CommandeController::class,"saveCommande"])->name("commandes.save");
     Route::get('commandes/{id}', [CommandeController::class,"show"])->name("commandes.show");
+
+    Route::post('commandes/article', [CommandeArticleController::class,"addArticlToCommande"])->name("commandes.article.save");
+    Route::get('commandes/article/delete/{id}', [CommandeArticleController::class,"deleteArticlFromCommande"])->name("commandes.article.delete");
+
+
 
     Route::get("livrisions",[LivrisionController::class,"index"])->name("livrisions.index");
     Route::post('livrisions', [LivrisionController::class,"savelivrision"])->name("livrisions.save");
