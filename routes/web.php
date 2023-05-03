@@ -4,6 +4,7 @@ use App\Http\Controllers\CommandeArticleController;
 use App\Http\Controllers\CouleurController;
 use App\Http\Controllers\FonctionController;
 use App\Http\Controllers\FournisseurController;
+use App\Http\Controllers\LivrisionArticleController;
 use App\Http\Controllers\LivrisionController;
 use App\Http\Controllers\TailleurController;
 use App\Http\Controllers\TypeProduitController;
@@ -70,9 +71,13 @@ Route::middleware('auth')->group(function () {
 
 
 
-    Route::get("livrisions",[LivrisionController::class,"index"])->name("livrisions.index");
-    Route::post('livrisions', [LivrisionController::class,"savelivrision"])->name("livrisions.save");
-    Route::get('livrisions/{id}', [LivrisionController::class,"show"])->name("livrisions.show");
+    Route::get("livraisons",[LivrisionController::class,"index"])->name("livraisons.index");
+    Route::post('livraisons', [LivrisionController::class,"savelivrision"])->name("livraisons.save");
+    Route::get('livraisons/{id}', [LivrisionController::class,"show"])->name("livraisons.show");
+
+    Route::post('livraisons/article', [LivrisionArticleController::class,"addArticlTolivraison"])->name("livraisons.article.save");
+    Route::get('livraisons/article/delete/{id}', [LivrisionArticleController::class,"deleteArticlFromlivraison"])->name("livraisons.article.delete");
+
 
     Route::get('profile', [\App\Http\Controllers\ProfileController::class, 'show'])->name('profile.show');
     Route::put('profile', [\App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update');

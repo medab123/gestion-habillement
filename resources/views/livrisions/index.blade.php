@@ -3,55 +3,74 @@
     <!-- Button trigger modal -->
 
     <!-- Modal -->
-    <div class="modal fade bd-example-modal-lg p-3" id="livrisionModal" tabindex="-1" aria-labelledby="livrisionModalLabel"
+    <div class="modal fade bd-example-modal-lg p-3" id="livraisonModal" tabindex="-1" aria-labelledby="livraisonModalLabel"
         aria-hidden="true">
         <div class="modal-dialog modal-lg  ">
             <div class="modal-content">
-                <form id="livrisionForm" method="POST">
+                <form id="livraisonForm" method="POST">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="livrisionModalLabel">Créer un nouveau
-                            Livrision</h5>
+                        <h5 class="modal-title" id="livraisonModalLabel">Créer un nouveau
+                            Livraison</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body ">
-                        <!-- Input fields for creating or updating a livrision -->
+                        <!-- Input fields for creating or updating a livraison -->
                         @csrf
                         <div class="row border border-primary rounded p-2">
-                            <div class="col-6">
+                            <div class="col-4">
                                 <label for="name" class="form-label">Tailleur</label>
                                 <select class="form-control form-control-sm" id="tailleur_idInput" name="tailleur_id"
                                     required>
-                                    <option value=""></option>
+                                    <option value="">Choisir une tailleur</option>
                                     @foreach ($tailleurs as $tailleur)
                                         <option value="{{ $tailleur->id }}">{{ $tailleur->name }} {{ $tailleur->lname }}</option>
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="col-6">
-                                <label for="name" class="form-label">Vetement</label>
-                                <select class="form-control form-control-sm" id="vetement_idInput" name="vetement_id"
-                                    required>
-                                    <option value=""></option>
-                                    @foreach ($vetements as $vetement)
-                                        <option value="{{ $vetement->id }}">{{ $vetement->name }}</option>
+                            <div class="col-4">
+                                <label for="lname" class="form-label">Commande</label>
+                                <select class="form-control form-control-sm" name="commande_id" required>
+                                    <option value="">Choisir une Commande</option>
+                                    @foreach ($commandes as $commande)
+                                        <option value="{{ $commande->id }}">{{ $commande->id }}</option>
                                     @endforeach
                                 </select>
                             </div>
+                            <div class="col-4">
+                                <label for="lname" class="form-label">Date de Livrison</label>
+                                <input type="date" class="form-control form-control-sm" name="date_livrison" required>
+
+                            </div>
                         </div>
-                        <div class="livrisionArticles mt-3">
+                        <div class="livraisonArticles mt-3">
                             <div id="article0" class="row  border border-success rounded p-2">
-
-
+                                <div class="col-md-3">
+                                    <label for="name" class="form-label">Vetement</label>
+                                    <select class="form-control form-control-sm" name="vetement_id[]" required>
+                                        <option value="">Choisir une vetement</option>
+                                        @foreach ($vetements as $vetement)
+                                            <option value="{{ $vetement->id }}">{{ $vetement->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="name" class="form-label">Couleur </label>
+                                    <select class="form-control form-control-sm" name="couleur_id[]" required>
+                                        <option value="">Choisir une Couleur</option>
+                                        @foreach ($couleurs as $couleur)
+                                            <option value="{{ $couleur->id }}">{{ $couleur->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
                                 <div class="col-md-3">
                                     <label for="name" class="form-label">Taille </label>
-                                    <input type="number" class="form-control form-control-sm" name="taille[]" required>
+                                    <input type="number" class="form-control form-control-sm" name="taille[]" placeholder="Taille .." required>
                                 </div>
                                 <div class="col-md-2">
                                     <label for="name" class="form-label">Qte </label>
-                                    <input type="number" class="form-control form-control-sm" name="qte[]" required>
+                                    <input type="number" class="form-control form-control-sm" name="qte[]" placeholder="Qte .." required>
                                 </div>
                                 <div class="col-md-1 btn-delete">
-
                                     <button type="button" onclick="deleteArticle(this)"
                                         class=" text-white  btn btn-danger btn-sm mt-4">Delete</button>
                                 </div>
@@ -65,7 +84,7 @@
                         </div>
                         <script>
                             const addArticle = () => {
-                                $(".livrisionArticles").append('<div class="row  border border-success rounded p-2 mt-2">' + $("#article0")
+                                $(".livraisonArticles").append('<div class="row  border border-success rounded p-2 mt-2">' + $("#article0")
                                     .html() + "</div>")
                             }
                             const deleteArticle = (btn) => {
@@ -88,9 +107,9 @@
     </div>
     <div class="card">
         <div class="card-header">
-            Livrisions
+            Livraisons
             <button class="btn btn-sm btn-success float-end text-white" data-bs-toggle="modal"
-                data-bs-target="#livrisionModal">Ajouter un livrision </button>
+                data-bs-target="#livraisonModal">Ajouter un livraison </button>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -99,28 +118,31 @@
                     <thead class="table-dark">
                         <tr>
                             <th>#</th>
+                            <th>Num Commande</th>
                             <th>Tailleur</th>
-                            <th>Vetement</th>
+                            <th>Date de livraison</th>
                             <th style="width: 150px">Action</th>
                         </tr>
 
                     </thead>
                     <tbody>
-                        @foreach ($livrisions as $livrision)
+                        @foreach ($livraisons as $livraison)
                             <tr>
-                                <td>{{ $livrision->id }}</td>
-                                <td class="name">{{ $livrision->tailleur?->name }} {{ $livrision->tailleur?->lname }}</td>
-                                <td class="lname">{{ $livrision->vetement?->name }}</td>
+                                <td>{{ $livraison->id }}</td>
+                                <td class="name">{{ $livraison->commande_id }}</td>
+
+                                <td class="name">{{ $livraison->tailleur?->name }} {{ $livraison->tailleur?->lname }}</td>
+                                <td class="lname">{{ $livraison->date_livrison }}</td>
 
                                 <td>
-                                    <button class="btn btn-sm text-success" onclick="edit({{ $livrision->id }},this)"><i
+                                    <button class="btn btn-sm text-success" onclick="edit({{ $livraison->id }},this)"><i
                                             class="fas fa-edit"></i>
                                     </button>
                                     <button class="btn btn-sm text-danger"
-                                        onclick="deleteLivrision({{ $livrision->id }},this)"><i
+                                        onclick="deleteLivraison({{ $livraison->id }},this)"><i
                                             class="fa-solid fa-trash"></i>
                                     </button>
-                                    <a class="btn btn-sm text-primary" href="{{ route("livrisions.index")."/".$livrision->id }}"><i
+                                    <a class="btn btn-sm text-primary" href="{{ route("livraisons.index")."/".$livraison->id }}"><i
                                             class="fas fa-eye"></i>
                                     </a>
 
@@ -133,10 +155,10 @@
         </div>
     </div>
     <script>
-        var myModalEl = document.getElementById('livrisionModal')
+        var myModalEl = document.getElementById('livraisonModal')
         myModalEl.addEventListener('hide.bs.modal', function(event) {
             $("#hiddenId").remove();
-            $('#livrisionForm').trigger("reset");
+            $('#livraisonForm').trigger("reset");
         })
         const edit = (id, btn) => {
             var name = $(btn).parent().parent().children(".name").html()
@@ -150,22 +172,22 @@
             $("#telInput").val(tel);
             $("#function_idInput").find("option:contains('" + functionName + "')").prop("selected", true);
             $("#adresseInput").val(adresse);
-            $("#livrisionModal").modal("show");
-            $("#livrisionForm").append("<input id='hiddenId' type='hidden' name='id' value='" + id + "'>")
+            $("#livraisonModal").modal("show");
+            $("#livraisonForm").append("<input id='hiddenId' type='hidden' name='id' value='" + id + "'>")
             console.log(id, name);
         }
-        const deleteLivrision = (id, btn) => {
+        const deleteLivraison = (id, btn) => {
             $(btn).html(
                 '<span class="spinner-border spinner-border-sm " role="status" aria-hidden="true"></span>'
             ).attr('disabled', true);
 
-            $.get("{{ url('livrisions/delete') }}" + "/" + id).then(() => {
+            $.get("{{ url('livraisons/delete') }}" + "/" + id).then(() => {
                 $(btn).parent().parent().remove()
             }).always(function(data) {
                 alert(data.message);
             });
         }
-        $('#livrisionForm').submit(function(e) {
+        $('#livraisonForm').submit(function(e) {
             e.preventDefault(); // prevent the form from submitting normally
 
             // get the form data
@@ -179,15 +201,15 @@
             // send the AJAX request
             $.ajax({
                 type: 'POST',
-                url: '{{ route('livrisions.save') }}',
+                url: '{{ route('livraisons.save') }}',
                 data: formData,
                 success: function(response) {
                     // display a success message and close the modal
                     alert(response.message);
-                    $('#livrisionModal').modal('hide');
+                    $('#livraisonModal').modal('hide');
 
                     // reset the form fields
-                    $('#livrisionForm input, #livrisionForm select').val('');
+                    $('#livraisonForm input, #livraisonForm select').val('');
 
                     // reload the page to show the updated data
                     location.reload();

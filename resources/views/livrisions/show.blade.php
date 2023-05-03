@@ -1,35 +1,44 @@
 @extends('layouts.app')
 @section('content')
     <!-- Button trigger modal -->
-    <div class="modal fade bd-example-modal-lg p-3" id="commandeModal" tabindex="-1"
-        aria-labelledby="commandeModalLabel" aria-hidden="true">
+    <div class="modal fade bd-example-modal-lg p-3" id="livraisonModal" tabindex="-1"
+        aria-labelledby="livraisonModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg  ">
             <div class="modal-content">
-                <form id="commandeForm" method="POST">
+                <form id="livraisonForm" method="POST">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="commandeModalLabel">Modifier Commande</h5>
+                        <h5 class="modal-title" id="livraisonModalLabel">Modifier Livraison</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body ">
-                        <!-- Input fields for creating or updating a commande -->
+                        <!-- Input fields for creating or updating a livraison -->
                         @csrf
                         <div class="row border border-primary rounded p-2">
-                            <div class="col-6">
-                                <input type="hidden" name="id" value="{{ $commandeItems[0]->commande->id }}">
+                            <input type="hidden" name="id" value="{{ $livraisonItems[0]->livraison->id }}">
+
+                            <div class="col-4">
                                 <label for="name" class="form-label">Tailleur</label>
-                                <select class="form-control form-control-sm"  id="tailleurInput">
-                                    <option value=""></option>
+                                <select class="form-control form-control-sm" id="tailleur_idInput" name="tailleur_id"
+                                    required>
+                                    <option value="">Choisir une tailleur</option>
                                     @foreach ($tailleurs as $tailleur)
-                                        <option value="{{ $tailleur->id }}"
-                                            {{ $commandeItems[0]->commande?->tailleur_id == $tailleur->id ? 'selected' : '' }}>
-                                            {{ $tailleur->name }} {{ $tailleur->lname }}</option>
+                                        <option value="{{ $tailleur->id }}">{{ $tailleur->name }} {{ $tailleur->lname }}</option>
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="col-6">
-                                <label for="lname" class="form-label">Date de commande</label>
-                                <input type="date" class="form-control form-control-sm" id="date_commandeInput"
-                                    name="date_commande"  value="{{ $commandeItems[0]->commande?->date_commande }}">
+                            <div class="col-4">
+                                <label for="lname" class="form-label">Commande</label>
+                                <select class="form-control form-control-sm" name="commande_id" id="commandeInput" required>
+                                    <option value="">Choisir une Commande</option>
+                                    @foreach ($commandes as $commande)
+                                        <option value="{{ $commande->id }}">{{ $commande->id }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-4">
+                                <label for="lname" class="form-label">Date de Livrison</label>
+                                <input type="date" class="form-control form-control-sm" name="date_livrison" id="date_livraisonInput" required>
+
                             </div>
                         </div>
                     </div>
@@ -42,40 +51,48 @@
         </div>
     </div>
     <!-- Modal -->
-    <div class="modal fade bd-example-modal-lg p-3" id="commandeItemModal" tabindex="-1"
-        aria-labelledby="commandeItemModalLabel" aria-hidden="true">
+    <div class="modal fade bd-example-modal-lg p-3" id="livraisonItemModal" tabindex="-1"
+        aria-labelledby="livraisonItemModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg  ">
             <div class="modal-content">
-                <form id="commandeItemForm" method="POST">
+                <form id="livraisonItemForm" method="POST">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="commandeItemModalLabel">Créer un nouveau
+                        <h5 class="modal-title" id="livraisonItemModalLabel">Créer un nouveau
                             Article</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body ">
-                        <!-- Input fields for creating or updating a commande -->
+                        <!-- Input fields for creating or updating a livraison -->
                         @csrf
                         <div class="row border border-primary rounded p-2">
-                            <div class="col-6">
+                            <div class="col-4">
                                 <label for="name" class="form-label">Tailleur</label>
                                 <select class="form-control form-control-sm" disabled>
                                     <option value=""></option>
                                     @foreach ($tailleurs as $tailleur)
                                         <option value="{{ $tailleur->id }}"
-                                            {{ $commandeItems[0]->commande?->tailleur_id == $tailleur->id ? 'selected' : '' }}>
+                                            {{ $livraisonItems[0]->livraison?->tailleur_id == $tailleur->id ? 'selected' : '' }}>
                                             {{ $tailleur->name }} {{ $tailleur->lname }}</option>
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="col-6">
-                                <label for="lname" class="form-label">Date de commande</label>
-                                <input type="date" class="form-control form-control-sm" 
-                                    name="date_commande" disabled
-                                    value="{{ $commandeItems[0]->commande?->date_commande }}">
+                            <div class="col-4">
+                                <label for="name" class="form-label">Code Commande</label>
+                                <select class="form-control form-control-sm" disabled>
+                                    <option value="{{ $livraisonItems[0]->livraison?->commande_id }}">{{ $livraisonItems[0]->livraison?->commande_id }}</option>
+
+                                </select>
+                            </div>
+                            <div class="col-4">
+                                <label for="lname" class="form-label">Date de livraison</label>
+                                <input type="date" class="form-control form-control-sm"
+                                    name="date_livraison" disabled
+                                    value="{{ $livraisonItems[0]->livraison?->date_livrison }}">
                             </div>
                         </div>
-                        <div class="commandeArticles mt-3">
+                        <div class="livraisonArticles mt-3">
                             <div id="article0" class="row  border border-success rounded p-2">
+                                <input type="hidden" name="livraison_id" value="{{$livraisonItems[0]->livraison?->id}}">
                                 <div class="col-md-3">
                                     <label for="name" class="form-label">Vetement</label>
                                     <select class="form-control form-control-sm" name="vetement_id" required
@@ -124,7 +141,7 @@
     </div>
     <div class="card mb-2">
         <div class="card-header">
-            Commande Info
+            Livraison Info
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -133,20 +150,21 @@
                     <thead class="table-dark">
                         <tr>
                             <th>#</th>
+                            <th>Num Commande</th>
                             <th>Tailleur</th>
-                            <th>Date de commande</th>
-                            <th style="width: 60px">Action</th>
+                            <th>Date de livraison</th>
+                            <th style="width: 150px">Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td>{{ $commandeItems[0]->commande->id }}</td>
-                            <td class="tailleur">{{ $commandeItems[0]->commande->tailleur->name }}
-                                {{ $commandeItems[0]->commande->tailleur->lname }}</td>
-                            <td class="date_commande">{{ $commandeItems[0]->commande->date_commande }}</td>
+                            <td>{{ $livraisonItems[0]->livraison->id }}</td>
+                            <td class="commande">{{ $livraisonItems[0]->livraison->commande_id }}</td>
+                            <td class="tailleur">{{ $livraisonItems[0]->livraison->tailleur->name }} {{ $livraisonItems[0]->livraison->tailleur->lname }}</td>
+                            <td class="date_livraison">{{ $livraisonItems[0]->livraison->date_livrison }}</td>
                             <td>
                                 <button class="btn btn-sm text-success"
-                                    onclick="editCommande({{ $commandeItems[0]->commande->id }},this)"><i
+                                    onclick="editLivraison({{ $livraisonItems[0]->livraison->id }},this)"><i
                                         class="fas fa-edit"></i>
                                 </button>
 
@@ -160,9 +178,9 @@
     </div>
     <div class="card">
         <div class="card-header">
-            Commande Articles
+            Livraison Articles
             <button class="btn btn-sm btn-success float-end text-white" data-bs-toggle="modal"
-                data-bs-target="#commandeItemModal">Ajouter un Article </button>
+                data-bs-target="#livraisonItemModal">Ajouter un Article </button>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -180,22 +198,22 @@
 
                     </thead>
                     <tbody>
-                        @foreach ($commandeItems as $commandeItem)
+                        @foreach ($livraisonItems as $livraisonItem)
                             <tr>
-                                <td class="id">{{ $commandeItem->id }}</td>
-                                <td class="vetement">{{ $commandeItem->vetement?->name }}
-                                    {{ $commandeItem->tailleur?->lname }}</td>
-                                <td class="couleur">{{ $commandeItem->couleur?->name }}</td>
-                                <td class="qte">{{ $commandeItem->qte }}</td>
-                                <td class="taille">{{ $commandeItem->taille }}</td>
+                                <td class="id">{{ $livraisonItem->id }}</td>
+                                <td class="vetement">{{ $livraisonItem->vetement?->name }}
+                                    {{ $livraisonItem->tailleur?->lname }}</td>
+                                <td class="couleur">{{ $livraisonItem->couleur?->name }}</td>
+                                <td class="qte">{{ $livraisonItem->qte }}</td>
+                                <td class="taille">{{ $livraisonItem->taille }}</td>
 
                                 <td>
                                     <button class="btn btn-sm text-success"
-                                        onclick="editcommandeItem({{ $commandeItem->id }},this)"><i
+                                        onclick="editlivraisonItem({{ $livraisonItem->id }},this)"><i
                                             class="fas fa-edit"></i>
                                     </button>
                                     <button class="btn btn-sm text-danger"
-                                        onclick="deleteCommandeItem({{ $commandeItem->id }},this)"><i
+                                        onclick="deleteLivraisonItem({{ $livraisonItem->id }},this)"><i
                                             class="fa-solid fa-trash"></i>
                                     </button>
 
@@ -209,20 +227,22 @@
         </div>
     </div>
     <script>
-        var myModalEl = document.getElementById('commandeItemModal')
+        var myModalEl = document.getElementById('livraisonItemModal')
         myModalEl.addEventListener('hide.bs.modal', function(event) {
             $("#hiddenId").remove();
-            $('#commandeItemForm').trigger("reset");
+            $('#livraisonItemForm').trigger("reset");
         })
-        const editCommande = (id, btn) => {
+        const editLivraison = (id, btn) => {
             var tailleur = $(btn).parent().parent().children(".tailleur").html()
-            var date_commande = $(btn).parent().parent().children(".date_commande").html()
-            console.log(tailleur,date_commande);
-            $("#tailleurInput").find("option:contains('" + $.trim(tailleur) + "')").prop("selected", true);
-            $("#date_commandeInput").val(date_commande);
-            $("#commandeModal").modal("show");
+            var commande = $(btn).parent().parent().children(".commande").html()
+            var date_livraison = $(btn).parent().parent().children(".date_livraison").html()
+            console.log(tailleur,date_livraison);
+            $("#tailleur_idInput").find("option:contains('" + $.trim(tailleur) + "')").prop("selected", true);
+            $("#commandeInput").find("option:contains('" + $.trim(commande) + "')").prop("selected", true);
+            $("#date_livraisonInput").val(date_livraison);
+            $("#livraisonModal").modal("show");
         }
-        const editcommandeItem = (id, btn) => {
+        const editlivraisonItem = (id, btn) => {
 
             var vetement = $(btn).parent().parent().children(".vetement").html()
             var couleur = $(btn).parent().parent().children(".couleur").html()
@@ -232,22 +252,33 @@
             $("#couleurInput").find("option:contains('" + couleur + "')").prop("selected", true);
             $("#qteInput").val(qte);
             $("#tailleInput").val(taille);
-            $("#commandeItemModal").modal("show");
-            $("#commandeItemForm").append("<input id='hiddenId' type='hidden' name='id' value='" + id + "'>")
+            $("#livraisonItemModal").modal("show");
+            $("#livraisonItemForm").append("<input id='hiddenId' type='hidden' name='id' value='" + id + "'>")
             console.log(vetement, couleur, qte, taille);
         }
-        const deleteCommande = (id, btn) => {
+        const deleteLivraison = (id, btn) => {
             $(btn).html(
                 '<span class="spinner-border spinner-border-sm " role="status" aria-hidden="true"></span>'
             ).attr('disabled', true);
 
-            $.get("{{ url('commandes/delete') }}" + "/" + id).then(() => {
+            $.get("{{ url('livraisons/delete') }}" + "/" + id).then(() => {
                 $(btn).parent().parent().remove()
             }).always(function(data) {
                 alert(data.message);
             });
         }
-        $('#commandeForm').submit(function(e) {
+        const deleteLivraisonItem = (id, btn) => {
+            $(btn).html(
+                '<span class="spinner-border spinner-border-sm " role="status" aria-hidden="true"></span>'
+            ).attr('disabled', true);
+
+            $.get("{{ url('livraisons/article/delete') }}" + "/" + id).then(() => {
+                $(btn).parent().parent().remove()
+            }).always(function(data) {
+                alert(data.message);
+            });
+        }
+        $('#livraisonForm').submit(function(e) {
             e.preventDefault(); // prevent the form from submitting normally
 
             // get the form data
@@ -261,15 +292,50 @@
             // send the AJAX request
             $.ajax({
                 type: 'POST',
-                url: '{{ route('commandes.save') }}',
+                url: '{{ route('livraisons.save') }}',
                 data: formData,
                 success: function(response) {
                     // display a success message and close the modal
                     alert(response.message);
-                    $('#commandeModal').modal('hide');
+                    $('#livraisonModal').modal('hide');
 
                     // reset the form fields
-                    $('#commandeForm input, #commandeForm select').val('');
+                    $('#livraisonForm input, #livraisonForm select').val('');
+
+                    // reload the page to show the updated data
+                    location.reload();
+                },
+                error: function(response) {
+                    // display an error message and re-enable the submit button
+                    alert('Error: ' + response.responseJSON.message);
+                    $('.modal-footer button[type="submit"]').html('Save changes').attr('disabled',
+                        false);
+                }
+            });
+        });
+        $('#livraisonItemForm').submit(function(e) {
+            e.preventDefault(); // prevent the form from submitting normally
+
+            // get the form data
+            var formData = $(this).serialize();
+
+            // display a loading indicator
+            $('.modal-footer button[type="submit"]').html(
+                '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>Loading...'
+            ).attr('disabled', true);
+
+            // send the AJAX request
+            $.ajax({
+                type: 'POST',
+                url: '{{ route('livraisons.article.save') }}',
+                data: formData,
+                success: function(response) {
+                    // display a success message and close the modal
+                    alert(response.message);
+                    $('#livraisonItemModal').modal('hide');
+
+                    // reset the form fields
+                    $('#livraisonItemForm input, #livraisonItemForm select').val('');
 
                     // reload the page to show the updated data
                     location.reload();

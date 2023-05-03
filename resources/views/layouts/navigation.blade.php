@@ -14,10 +14,10 @@
         </a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="{{ route('livrisions.index') }}">
+        <a class="nav-link" href="{{ route('livraisons.index') }}">
             <i class="nav-icon cil-speedometer"></i>
 
-            {{ __('Livrisions') }}
+            {{ __('Livraisons') }}
         </a>
     </li>
     <li class="nav-item">
@@ -61,7 +61,7 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('functions.index') }}" target="_top">
-                    <i class="cil-bug nav-iconh"></i>
+                    <i class="cil-bug nav-icon"></i>
 
                     Fonctions
                 </a>

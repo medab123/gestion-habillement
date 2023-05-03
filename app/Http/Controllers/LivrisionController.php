@@ -15,40 +15,40 @@ class LivrisionController extends Controller
 {
     public function index()
     {
-        $livrisions = Livrision::with("tailleur")->with("vetement")->get();
-        $commandes  = Commande::with("tailleur")->get();
+        $livraisons = Livrision::with("tailleur")->with("vetement")->get();
+        $commandes  = Commande::get();
         $tailleurs  = Tailleur::all();
         $vetements  = Vetement::all();
-        return view("livrisions.index", compact("tailleurs", "vetements","livrisions"));
+        $couleurs   = Couleur::all();
+        return view("livrisions.index", compact("tailleurs", "vetements","livraisons","commandes","couleurs"));
     }
     public function saveLivrision(Request $request)
     {
         $id = $request->input('id');
         if ($id) {
-            return response()->json(['success' => true, 'message' => 'Client updated successfully']);
+            $comande = Livrision::find($id);
+            $comande->commande_id = $request->input("tailleur_id");
+            $comande->tailleur_id = $request->input("tailleur_id");
+            $comande->date_livrison = $request->input("date_livrison");
+            $comande->save();
+            return response()->json(['success' => true, 'message' => 'Livriason updated successfully']);
         } else {
             // create a new record
             $data = $request->all();
-            $commande = new Commande();
-            $commande->tailleur_id = $data['tailleur_id'];
-            $commande->date_commande = $data['date_commande'];
-            $commande->save();
-            // Loop through the vetement_id, couleur_id, taille, and qte arrays to associate them with the Commande model
+            $livrison = new Livrision();
+            $livrison->commande_id = $data['commande_id'];
+            $livrison->tailleur_id = $data['tailleur_id'];
+            $livrison->date_livrison = $data['date_livrison'];
+            $livrison->save();
             for ($i = 0; $i < count($data['vetement_id']); $i++) {
-                $commandeItem = new LivrisionArticle();
-                $commandeItem->commande_id = $commande->id;
-                $commandeItem->vetement_id = $data['vetement_id'][$i];
-                $commandeItem->couleur_id = $data['couleur_id'][$i];
-                $commandeItem->taille = $data['taille'][$i];
-                $commandeItem->qte = $data['qte'][$i];
-
-                // Save the CommandeItem model
-                $commandeItem->save();
+                $livrisonItem = new LivrisionArticle();
+                $livrisonItem->livrision_id = $livrison->id;
+                $livrisonItem->vetement_id = $data['vetement_id'][$i];
+                $livrisonItem->couleur_id = $data['couleur_id'][$i];
+                $livrisonItem->taille = $data['taille'][$i];
+                $livrisonItem->qte = $data['qte'][$i];
+                $livrisonItem->save();
             }
-
-            // Save the Commande model
-
-
             return response()->json(['success' => true, 'message' => 'Client created successfully']);
         }
     }
@@ -56,8 +56,11 @@ class LivrisionController extends Controller
         $tailleurs = Tailleur::all();
         $vetements = Vetement::all();
         $colors    = Couleur::all();
+        $commandes  = Commande::get();
+
         //$commande = Commande::find($id);
-        $commandeItems = CommandeArticle::where("commande_id",$id)->with("vetement","couleur","commande")->get();
-        return view("commandes.show",compact("commandeItems",/*"commande",*/"vetements", "colors","tailleurs"));
+        $livraisonItems = LivrisionArticle::where("livrision_id",$id)->with("vetement","livraison","couleur")->get();
+        //dd($livraisonItems);
+        return view("livrisions.show",compact("livraisonItems","commandes","vetements", "colors","tailleurs"));
     }
 }
