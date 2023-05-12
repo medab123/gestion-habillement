@@ -64,9 +64,9 @@ Route::middleware('auth')->group(function () {
     Route::post('commandes', [CommandeController::class,"saveCommande"])->name("commandes.save");
     Route::get('commandes/{id}', [CommandeController::class,"show"])->name("commandes.show");
 
-    Route::get("livrisions",[LivrisionController::class,"index"])->name("livrisions.index");
-    Route::post('livrisions', [LivrisionController::class,"savelivrision"])->name("livrisions.save");
-    Route::get('livrisions/{id}', [LivrisionController::class,"show"])->name("livrisions.show");
+    Route::get("livrisons",[LivrisionController::class,"index"])->name("livrisons.index");
+    Route::post('livrisons', [LivrisionController::class,"savelivrison"])->name("livrisons.save");
+    Route::get('livrisons/{id}', [LivrisionController::class,"show"])->name("livrisons.show");
 
     Route::get('profile', [\App\Http\Controllers\ProfileController::class, 'show'])->name('profile.show');
     Route::put('profile', [\App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update');

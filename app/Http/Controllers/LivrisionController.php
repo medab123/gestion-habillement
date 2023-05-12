@@ -15,11 +15,11 @@ class LivrisionController extends Controller
 {
     public function index()
     {
-        $livrisions = Livrision::with("tailleur")->with("vetement")->get();
+        $livrisons = Livrision::with("tailleur")->with("vetement")->get();
         $commandes  = Commande::with("tailleur")->get();
         $tailleurs  = Tailleur::all();
         $vetements  = Vetement::all();
-        return view("livrisions.index", compact("tailleurs", "vetements","livrisions"));
+        return view("livrisions.index", compact("tailleurs", "vetements","livrisons"));
     }
     public function saveLivrision(Request $request)
     {
@@ -58,6 +58,6 @@ class LivrisionController extends Controller
         $colors    = Couleur::all();
         //$commande = Commande::find($id);
         $commandeItems = CommandeArticle::where("commande_id",$id)->with("vetement","couleur","commande")->get();
-        return view("commandes.show",compact("commandeItems",/*"commande",*/"vetements", "colors","tailleurs"));
+        return view("livrision.show",compact("commandeItems",/*"commande",*/"vetements", "colors","tailleurs"));
     }
 }

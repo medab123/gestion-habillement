@@ -3,18 +3,18 @@
     <!-- Button trigger modal -->
 
     <!-- Modal -->
-    <div class="modal fade bd-example-modal-lg p-3" id="livrisionModal" tabindex="-1" aria-labelledby="livrisionModalLabel"
+    <div class="modal fade bd-example-modal-lg p-3" id="livrisonModal" tabindex="-1" aria-labelledby="livrisonModalLabel"
         aria-hidden="true">
         <div class="modal-dialog modal-lg  ">
             <div class="modal-content">
-                <form id="livrisionForm" method="POST">
+                <form id="livrisonForm" method="POST">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="livrisionModalLabel">Créer un nouveau
-                            Livrision</h5>
+                        <h5 class="modal-title" id="livrisonModalLabel">Créer un nouveau
+                            Livrison</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body ">
-                        <!-- Input fields for creating or updating a livrision -->
+                        <!-- Input fields for creating or updating a livrison -->
                         @csrf
                         <div class="row border border-primary rounded p-2">
                             <div class="col-6">
@@ -38,7 +38,7 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="livrisionArticles mt-3">
+                        <div class="livrisonArticles mt-3">
                             <div id="article0" class="row  border border-success rounded p-2">
 
 
@@ -65,7 +65,7 @@
                         </div>
                         <script>
                             const addArticle = () => {
-                                $(".livrisionArticles").append('<div class="row  border border-success rounded p-2 mt-2">' + $("#article0")
+                                $(".livrisonArticles").append('<div class="row  border border-success rounded p-2 mt-2">' + $("#article0")
                                     .html() + "</div>")
                             }
                             const deleteArticle = (btn) => {
@@ -88,9 +88,9 @@
     </div>
     <div class="card">
         <div class="card-header">
-            Livrisions
+            Livrisons
             <button class="btn btn-sm btn-success float-end text-white" data-bs-toggle="modal"
-                data-bs-target="#livrisionModal">Ajouter un livrision </button>
+                data-bs-target="#livrisonModal">Ajouter un livrison </button>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -106,21 +106,21 @@
 
                     </thead>
                     <tbody>
-                        @foreach ($livrisions as $livrision)
+                        @foreach ($livrisons as $livrison)
                             <tr>
-                                <td>{{ $livrision->id }}</td>
-                                <td class="name">{{ $livrision->tailleur?->name }} {{ $livrision->tailleur?->lname }}</td>
-                                <td class="lname">{{ $livrision->vetement?->name }}</td>
+                                <td>{{ $livrison->id }}</td>
+                                <td class="name">{{ $livrison->tailleur?->name }} {{ $livrison->tailleur?->lname }}</td>
+                                <td class="lname">{{ $livrison->vetement?->name }}</td>
 
                                 <td>
-                                    <button class="btn btn-sm text-success" onclick="edit({{ $livrision->id }},this)"><i
+                                    <button class="btn btn-sm text-success" onclick="edit({{ $livrison->id }},this)"><i
                                             class="fas fa-edit"></i>
                                     </button>
                                     <button class="btn btn-sm text-danger"
-                                        onclick="deleteLivrision({{ $livrision->id }},this)"><i
+                                        onclick="deleteLivrison({{ $livrison->id }},this)"><i
                                             class="fa-solid fa-trash"></i>
                                     </button>
-                                    <a class="btn btn-sm text-primary" href="{{ route("livrisions.index")."/".$livrision->id }}"><i
+                                    <a class="btn btn-sm text-primary" href="{{ route("livrisons.index")."/".$livrison->id }}"><i
                                             class="fas fa-eye"></i>
                                     </a>
 
@@ -133,10 +133,10 @@
         </div>
     </div>
     <script>
-        var myModalEl = document.getElementById('livrisionModal')
+        var myModalEl = document.getElementById('livrisonModal')
         myModalEl.addEventListener('hide.bs.modal', function(event) {
             $("#hiddenId").remove();
-            $('#livrisionForm').trigger("reset");
+            $('#livrisonForm').trigger("reset");
         })
         const edit = (id, btn) => {
             var name = $(btn).parent().parent().children(".name").html()
@@ -150,22 +150,22 @@
             $("#telInput").val(tel);
             $("#function_idInput").find("option:contains('" + functionName + "')").prop("selected", true);
             $("#adresseInput").val(adresse);
-            $("#livrisionModal").modal("show");
-            $("#livrisionForm").append("<input id='hiddenId' type='hidden' name='id' value='" + id + "'>")
+            $("#livrisonModal").modal("show");
+            $("#livrisonForm").append("<input id='hiddenId' type='hidden' name='id' value='" + id + "'>")
             console.log(id, name);
         }
-        const deleteLivrision = (id, btn) => {
+        const deleteLivrison = (id, btn) => {
             $(btn).html(
                 '<span class="spinner-border spinner-border-sm " role="status" aria-hidden="true"></span>'
             ).attr('disabled', true);
 
-            $.get("{{ url('livrisions/delete') }}" + "/" + id).then(() => {
+            $.get("{{ url('livrisons/delete') }}" + "/" + id).then(() => {
                 $(btn).parent().parent().remove()
             }).always(function(data) {
                 alert(data.message);
             });
         }
-        $('#livrisionForm').submit(function(e) {
+        $('#livrisonForm').submit(function(e) {
             e.preventDefault(); // prevent the form from submitting normally
 
             // get the form data
@@ -179,15 +179,15 @@
             // send the AJAX request
             $.ajax({
                 type: 'POST',
-                url: '{{ route('livrisions.save') }}',
+                url: '{{ route('livrisons.save') }}',
                 data: formData,
                 success: function(response) {
                     // display a success message and close the modal
                     alert(response.message);
-                    $('#livrisionModal').modal('hide');
+                    $('#livrisonModal').modal('hide');
 
                     // reset the form fields
-                    $('#livrisionForm input, #livrisionForm select').val('');
+                    $('#livrisonForm input, #livrisonForm select').val('');
 
                     // reload the page to show the updated data
                     location.reload();
