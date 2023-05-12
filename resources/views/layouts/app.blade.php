@@ -20,14 +20,14 @@
 
 </head>
 
-<body>
+<body >
     <div class="sidebar sidebar-dark sidebar-fixed" id="sidebar">
         <div class="sidebar-brand d-none d-md-flex">
-            
+
                 <i class="cib-teespring sidebar-brand-full"></i>
                 Gestion Habillement
-           
-            
+
+
 
         </div>
         @include('layouts.navigation')
