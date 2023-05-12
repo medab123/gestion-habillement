@@ -8,15 +8,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>{{ config('app.name', 'Laravel') }}</title>
     <meta name="theme-color" content="#ffffff">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
-        integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="{{ asset("css/all.min.css") }}"/>
     @vite('resources/sass/app.scss')
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"
-        integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://unpkg .com/@coreui/icons/css/free.min.css">
-    <link rel="stylesheet" href="https://unpkg.com/@coreui/icons/css/brand.min.css">
-    <link rel="stylesheet" href="https://unpkg.com/@coreui/icons/css/flag.min.css">
+    <script src="{{ asset("js/jquery-3.6.4.min.js") }}" ></script>
+    <link rel="stylesheet" href="{{ asset("icons/free.min.css")}}">
 
 </head>
 
@@ -92,8 +87,7 @@
     </div>
     @vite('resources/js/app.js')
     <script src="{{ asset('js/coreui.bundle.min.js') }}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
+    <script src="{{ asset("js/bootstrap.bundle.min.js") }}">
     </script>
 
 </body>
