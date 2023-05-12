@@ -17,7 +17,7 @@
                             <div class="col-6">
                                 <input type="hidden" name="id" value="{{ $commandeItems[0]->commande->id }}">
                                 <label for="name" class="form-label">Tailleur</label>
-                                <select class="form-control form-control-sm"  id="tailleurInput">
+                                <select class="form-control form-control-sm"  id="tailleurInput" name="tailleur_id">
                                     <option value=""></option>
                                     @foreach ($tailleurs as $tailleur)
                                         <option value="{{ $tailleur->id }}"
@@ -69,13 +69,14 @@
                             </div>
                             <div class="col-6">
                                 <label for="lname" class="form-label">Date de commande</label>
-                                <input type="date" class="form-control form-control-sm" 
+                                <input type="date" class="form-control form-control-sm"
                                     name="date_commande" disabled
                                     value="{{ $commandeItems[0]->commande?->date_commande }}">
                             </div>
                         </div>
                         <div class="commandeArticles mt-3">
                             <div id="article0" class="row  border border-success rounded p-2">
+                                <input type="hidden" name="commande_id" value="{{$commandeItems[0]->commande?->id}}">
                                 <div class="col-md-3">
                                     <label for="name" class="form-label">Vetement</label>
                                     <select class="form-control form-control-sm" name="vetement_id" required
@@ -247,6 +248,17 @@
                 alert(data.message);
             });
         }
+        const deleteCommandeItem = (id, btn) => {
+            $(btn).html(
+                '<span class="spinner-border spinner-border-sm " role="status" aria-hidden="true"></span>'
+            ).attr('disabled', true);
+
+            $.get("{{ url('commandes/article/delete') }}" + "/" + id).then(() => {
+                $(btn).parent().parent().remove()
+            }).always(function(data) {
+                alert(data.message);
+            });
+        }
         $('#commandeForm').submit(function(e) {
             e.preventDefault(); // prevent the form from submitting normally
 
@@ -270,6 +282,41 @@
 
                     // reset the form fields
                     $('#commandeForm input, #commandeForm select').val('');
+
+                    // reload the page to show the updated data
+                    location.reload();
+                },
+                error: function(response) {
+                    // display an error message and re-enable the submit button
+                    alert('Error: ' + response.responseJSON.message);
+                    $('.modal-footer button[type="submit"]').html('Save changes').attr('disabled',
+                        false);
+                }
+            });
+        });
+        $('#commandeItemForm').submit(function(e) {
+            e.preventDefault(); // prevent the form from submitting normally
+
+            // get the form data
+            var formData = $(this).serialize();
+
+            // display a loading indicator
+            $('.modal-footer button[type="submit"]').html(
+                '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>Loading...'
+            ).attr('disabled', true);
+
+            // send the AJAX request
+            $.ajax({
+                type: 'POST',
+                url: '{{ route('commandes.article.save') }}',
+                data: formData,
+                success: function(response) {
+                    // display a success message and close the modal
+                    alert(response.message);
+                    $('#commandeItemModal').modal('hide');
+
+                    // reset the form fields
+                    $('#commandeItemForm input, #commandeItemForm select').val('');
 
                     // reload the page to show the updated data
                     location.reload();

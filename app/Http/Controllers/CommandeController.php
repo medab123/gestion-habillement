@@ -23,6 +23,10 @@ class CommandeController extends Controller
     {
         $id = $request->input('id');
         if ($id) {
+            $comande = Commande::find($id);
+            $comande->tailleur_id = $request->input("tailleur_id");
+            $comande->date_commande = $request->input("date_commande");
+            $comande->save();
             return response()->json(['success' => true, 'message' => 'Client updated successfully']);
         } else {
             // create a new record

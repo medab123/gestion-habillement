@@ -8,32 +8,19 @@
     </li>
     <li class="nav-item">
         <a class="nav-link" href="{{ route('commandes.index') }}">
-            <i class="nav-icon cil-speedometer"></i>
+        <i class="nav-icon fa-solid fa-cart-shopping"></i>
 
             {{ __('Commandes') }}
         </a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="{{ route('livrisons.index') }}">
-            <i class="nav-icon cil-speedometer"></i>
+        <a class="nav-link" href="{{ route('livraisons.index') }}">
+        <i class="nav-icon fas fa-shipping-fast"></i>
 
-            {{ __('Livrisons') }}
+            {{ __('Livraisons') }}
         </a>
     </li>
-    <li class="nav-item">
-        <a class="nav-link" href="{{ route('clients.index') }}">
-            <i class="cil-people nav-icon"></i>
 
-            {{ __('Clients') }}
-        </a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="{{ route('vetements.index') }}">
-            <img class="" style="width: 30px !important;margin-right: 18px"
-                src="{{ asset('icons/la-chemise.png') }}">
-            {{ __('Vetements') }}
-        </a>
-    </li>
 
 
 
@@ -52,6 +39,19 @@
                     Tailleurs
                 </a>
             </li>
+            <li class="nav-item">
+        <a class="nav-link" href="{{ route('clients.index') }}">
+            <i class="cil-people nav-icon"></i>
+
+            {{ __('Clients') }}
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('vetements.index') }}">
+        <i class="nav-icon fa-solid fa-shirt"></i>
+            {{ __('Vetements') }}
+        </a>
+    </li>
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('couleurs.index') }}" target="_top">
                     <i class="cil-color-fill nav-icon"></i>

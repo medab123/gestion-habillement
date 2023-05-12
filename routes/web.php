@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\CommandeArticleController;
 use App\Http\Controllers\CouleurController;
 use App\Http\Controllers\FonctionController;
 use App\Http\Controllers\FournisseurController;
+use App\Http\Controllers\LivrisionArticleController;
 use App\Http\Controllers\LivrisionController;
 use App\Http\Controllers\TailleurController;
 use App\Http\Controllers\TypeProduitController;
@@ -64,9 +66,18 @@ Route::middleware('auth')->group(function () {
     Route::post('commandes', [CommandeController::class,"saveCommande"])->name("commandes.save");
     Route::get('commandes/{id}', [CommandeController::class,"show"])->name("commandes.show");
 
-    Route::get("livrisons",[LivrisionController::class,"index"])->name("livrisons.index");
-    Route::post('livrisons', [LivrisionController::class,"savelivrison"])->name("livrisons.save");
-    Route::get('livrisons/{id}', [LivrisionController::class,"show"])->name("livrisons.show");
+    Route::post('commandes/article', [CommandeArticleController::class,"addArticlToCommande"])->name("commandes.article.save");
+    Route::get('commandes/article/delete/{id}', [CommandeArticleController::class,"deleteArticlFromCommande"])->name("commandes.article.delete");
+
+
+
+    Route::get("livraisons",[LivrisionController::class,"index"])->name("livraisons.index");
+    Route::post('livraisons', [LivrisionController::class,"savelivrision"])->name("livraisons.save");
+    Route::get('livraisons/{id}', [LivrisionController::class,"show"])->name("livraisons.show");
+
+    Route::post('livraisons/article', [LivrisionArticleController::class,"addArticlTolivraison"])->name("livraisons.article.save");
+    Route::get('livraisons/article/delete/{id}', [LivrisionArticleController::class,"deleteArticlFromlivraison"])->name("livraisons.article.delete");
+
 
     Route::get('profile', [\App\Http\Controllers\ProfileController::class, 'show'])->name('profile.show');
     Route::put('profile', [\App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update');
