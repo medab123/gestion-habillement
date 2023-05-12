@@ -3,7 +3,7 @@
     <!-- Button trigger modal -->
 
     <!-- Modal -->
-    <div class="modal fade" id="userModal" tabindex="-1" aria-labelledby="functionModalLabel" aria-hidden="true">
+    <div class="modal fade" id="functionModal" tabindex="-1" aria-labelledby="functionModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <form id="functionForm" method="POST">
@@ -33,7 +33,7 @@
         <div class="card-header">
             Fournisseurs
             <button class="btn btn-sm btn-success float-end text-white" data-bs-toggle="modal"
-                data-bs-target="#userModal">Ajouter un function </button>
+                data-bs-target="#functionModal">Ajouter un function </button>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -81,7 +81,7 @@
             $(btn).html(
                 '<span class="spinner-border spinner-border-sm " role="status" aria-hidden="true"></span>'
             ).attr('disabled', true);
-            
+
             $.get("{{ url('functions/delete') }}"+"/"+id).then((data)=>{
                 $(btn).parent().parent().remove();
                 alert(data.message);

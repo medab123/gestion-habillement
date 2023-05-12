@@ -14,7 +14,7 @@
     @vite('resources/sass/app.scss')
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"
         integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://unpkg.com/@coreui/icons/css/free.min.css">
+    <link rel="stylesheet" href="https://unpkg .com/@coreui/icons/css/free.min.css">
     <link rel="stylesheet" href="https://unpkg.com/@coreui/icons/css/brand.min.css">
     <link rel="stylesheet" href="https://unpkg.com/@coreui/icons/css/flag.min.css">
 
