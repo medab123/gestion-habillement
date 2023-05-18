@@ -124,13 +124,13 @@
                                 <td class="lname">{{ $commande->date_commande }}</td>
 
                                 <td>
-                                    <button class="btn btn-sm text-success" onclick="edit({{ $commande->id }},this)"><i
+                                   <!--- <button class="btn btn-sm text-success" onclick="edit({{ $commande->id }},this)"><i
                                             class="fas fa-edit"></i>
                                     </button>
                                     <button class="btn btn-sm text-danger"
                                         onclick="deleteCommande({{ $commande->id }},this)"><i
                                             class="fa-solid fa-trash"></i>
-                                    </button>
+                                    </button>--->
                                     <a class="btn btn-sm text-primary" href="{{ route("commandes.index")."/".$commande->id }}"><i
                                             class="fas fa-eye"></i>
                                     </a>

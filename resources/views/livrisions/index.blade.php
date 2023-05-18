@@ -135,13 +135,13 @@
                                 <td class="lname">{{ $livraison->date_livrison }}</td>
 
                                 <td>
-                                    <button class="btn btn-sm text-success" onclick="edit({{ $livraison->id }},this)"><i
+                                    {{-- <button class="btn btn-sm text-success" onclick="edit({{ $livraison->id }},this)"><i
                                             class="fas fa-edit"></i>
                                     </button>
                                     <button class="btn btn-sm text-danger"
                                         onclick="deleteLivraison({{ $livraison->id }},this)"><i
                                             class="fa-solid fa-trash"></i>
-                                    </button>
+                                    </button> --}}
                                     <a class="btn btn-sm text-primary" href="{{ route("livraisons.index")."/".$livraison->id }}"><i
                                             class="fas fa-eye"></i>
                                     </a>
