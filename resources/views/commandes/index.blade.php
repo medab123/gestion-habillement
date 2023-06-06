@@ -44,7 +44,7 @@
                                         @endforeach
                                     </select>
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-2">
                                     <label for="name" class="form-label">Couleur </label>
                                     <select class="form-control form-control-sm" name="couleur_id[]" required>
                                         <option value=""></option>
@@ -53,13 +53,17 @@
                                         @endforeach
                                     </select>
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-2">
                                     <label for="name" class="form-label">Taille </label>
                                     <input type="number" class="form-control form-control-sm" name="taille[]" required>
                                 </div>
                                 <div class="col-md-2">
                                     <label for="name" class="form-label">Qte </label>
                                     <input type="number" class="form-control form-control-sm" name="qte[]" required>
+                                </div>
+                                <div class="col-md-2">
+                                    <label for="prix" class="form-label">Prix (DH) </label>
+                                    <input type="number" class="form-control form-control-sm" name="prix[]" required>
                                 </div>
                                 <div class="col-md-1 btn-delete">
 

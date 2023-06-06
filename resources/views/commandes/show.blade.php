@@ -97,16 +97,22 @@
                                         @endforeach
                                     </select>
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-2">
                                     <label for="name" class="form-label">Taille </label>
                                     <input type="number" class="form-control form-control-sm" name="taille" required
                                         id="tailleInput">
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-2">
                                     <label for="name" class="form-label">Qte </label>
                                     <input type="number" class="form-control form-control-sm" name="qte" required
                                         id="qteInput">
                                 </div>
+                                <div class="col-md-2">
+                                    <label for="prix" class="form-label">Prix (DH) </label>
+                                    <input type="number" class="form-control form-control-sm" name="prix" required
+                                        id="prixInput">
+                                </div>
+
                             </div>
                         </div>
 
@@ -176,6 +182,8 @@
                             <th>Couleur</th>
                             <th>Qte</th>
                             <th>Taille</th>
+                            <th>Prix </th>
+
                             <th style="width: 100px">Action</th>
                         </tr>
 
@@ -189,6 +197,7 @@
                                 <td class="couleur">{{ $commandeItem->couleur?->name }}</td>
                                 <td class="qte">{{ $commandeItem->qte }}</td>
                                 <td class="taille">{{ $commandeItem->taille }}</td>
+                                <td class="prix">{{ $commandeItem->prix??"-" }} Dh</td>
 
                                 <td>
                                     <button class="btn btn-sm text-success"
@@ -229,10 +238,14 @@
             var couleur = $(btn).parent().parent().children(".couleur").html()
             var qte = $(btn).parent().parent().children(".qte").html()
             var taille = $(btn).parent().parent().children(".taille").html()
+            var prix = $(btn).parent().parent().children(".prix").html()
+
             $("#vetementInput").find("option:contains('" + $.trim(vetement) + "')").prop("selected", true);
             $("#couleurInput").find("option:contains('" + couleur + "')").prop("selected", true);
             $("#qteInput").val(qte);
             $("#tailleInput").val(taille);
+            $("#prixInput").val(parseInt(prix));
+
             $("#commandeItemModal").modal("show");
             $("#commandeItemForm").append("<input id='hiddenId' type='hidden' name='id' value='" + id + "'>")
             console.log(vetement, couleur, qte, taille);

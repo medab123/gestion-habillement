@@ -43,7 +43,7 @@ class CommandeController extends Controller
                 $commandeItem->couleur_id = $data['couleur_id'][$i];
                 $commandeItem->taille = $data['taille'][$i];
                 $commandeItem->qte = $data['qte'][$i];
-
+                $commandeItem->prix = $data['prix'][$i];
                 // Save the CommandeItem model
                 $commandeItem->save();
             }

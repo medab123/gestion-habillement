@@ -29,31 +29,36 @@ class ClientController extends Controller
         $tele = $request->input('tel');
         $function_id = $request->input('function_id');
         $adresse = $request->input('adresse');
-
+        $taille_chausseur = $request->input('taille_chausseur');
+        $taille_pontallon = $request->input('taille_pontallon');
+        $taille_costume = $request->input('taille_costume');
+        $taille_chemise = $request->input('taille_chemise');
+        $taille_tshurt = $request->input('taille_tshurt');
+        $taille_ceinture = $request->input('taille_ceinture');
         // determine whether to create or update the record
         if ($id) {
             // update the existing record
             $client = Client::find($id);
-            $client->name = $name;
-            $client->tele = $tele;
-            $client->lname = $lname;
-            $client->function_id = $function_id;
-            $client->adresse = $adresse;
-            $client->save();
-
-            return response()->json(['success' => true, 'message' => 'Client updated successfully']);
         } else {
             // create a new record
             $client = new Client();
-            $client->name = $name;
-            $client->tele = $tele;
-            $client->lname = $lname;
-            $client->function_id = $function_id;
-            $client->adresse = $adresse;
-            $client->save();
-
-            return response()->json(['success' => true, 'message' => 'Client created successfully']);
         }
+        $client->name = $name;
+        $client->tele = $tele;
+        $client->lname = $lname;
+        $client->function_id = $function_id;
+        $client->adresse = $adresse;
+        $client->taille_costume = $taille_costume;
+        $client->taille_pontallon = $taille_pontallon;
+        $client->taille_chemise = $taille_chemise;
+        $client->taille_tshurt = $taille_tshurt;
+        $client->taille_ceinture = $taille_ceinture;
+        $client->taille_chausseur = $taille_chausseur;
+
+        $client->save();
+        return response()->json(['success' => true, 'message' => 'Client '.($id?'Created':'Updated').' successfully']);
+
+
     }
 
     public function store(Request $request)
@@ -71,6 +76,14 @@ class ClientController extends Controller
     {
         $client = Client::findOrFail($id); // retrieve the client with the given ID from the database
         return view('clients.edit', compact('client')); // return the view to edit the client
+    }
+    public function show($id){
+
+        $client = Client::with("function")->where("id",$id)->first();
+        //dd($client);
+        $functions = Fonction::all();
+
+        return view("clients.show",compact("client","functions"));
     }
 
     public function update(Request $request, $id)

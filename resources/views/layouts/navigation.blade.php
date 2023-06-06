@@ -49,7 +49,7 @@
     <li class="nav-item">
         <a class="nav-link" href="{{ route('vetements.index') }}">
         <i class="nav-icon fa-solid fa-shirt"></i>
-            {{ __('Vetements') }}
+            {{ __('Habillement') }}
         </a>
     </li>
             <li class="nav-item">
@@ -70,7 +70,7 @@
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('fournisseurs.index') }}" target="_top">
                     <i class=" nav-icon cil-factory"></i>
-                    Fournisseurs
+                    Site
                 </a>
             </li>
             <li class="nav-item">
@@ -78,7 +78,7 @@
                     <i class="nav-icon cil-find-in-page"></i>
 
 
-                    Type des vetements
+                    Type des Habillement
                 </a>
             </li>
         </ul>

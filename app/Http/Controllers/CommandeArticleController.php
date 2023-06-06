@@ -25,6 +25,8 @@ class CommandeArticleController extends Controller
             $articl->couleur_id = $request->input("couleur_id");
             $articl->taille = $request->input("taille");
             $articl->qte = $request->input("qte");
+            $articl->prix = $request->input("prix");
+
             $articl->save();
 
             return response()->json(['success' => true, 'message' => $message]);
